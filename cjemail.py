@@ -5,6 +5,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import time
 import itertools
+import http.server
+import socketserver
 
 load_dotenv()
 
@@ -30,37 +32,37 @@ def send_email(sender, recipients, subject, body, smtp_server, port, user, passw
         print(f"Failed to send email from {sender}: {e}")
 
 
-PORT = 10000
+EMAIL_PORT = 587
 
 # List of email configurations
 email_configurations = [
     {
         "smtp_server": "smtp.gmail.com",
-        "port": PORT,
+        "port": EMAIL_PORT,
         "user": os.getenv("EMAIL_USER_1"),
         "password": os.getenv("EMAIL_PASSWORD_1"),
     },
     {
         "smtp_server": "smtp.gmail.com",
-        "port": PORT,
+        "port": EMAIL_PORT,
         "user": os.getenv("EMAIL_USER_2"),
         "password": os.getenv("EMAIL_PASSWORD_2"),
     },
     {
         "smtp_server": "smtp.gmail.com",
-        "port": PORT,
+        "port": EMAIL_PORT,
         "user": os.getenv("EMAIL_USER_3"),
         "password": os.getenv("EMAIL_PASSWORD_3"),
     },
     {
         "smtp_server": "smtp.gmail.com",
-        "port": PORT,
+        "port": EMAIL_PORT,
         "user": os.getenv("EMAIL_USER_4"),
         "password": os.getenv("EMAIL_PASSWORD_4"),
     },
     {
         "smtp_server": "smtp.gmail.com",
-        "port": PORT,
+        "port": EMAIL_PORT,
         "user": os.getenv("EMAIL_USER_5"),
         "password": os.getenv("EMAIL_PASSWORD_5"),
     },
@@ -77,7 +79,28 @@ recipients = [
 
 # Email data to send
 subject = "Pago de mi liquidacion atrasado 1 año y 6 meses"
-body = "Por favor pagar lo restante de mi liquidacion mi dni es: 72767027. Se los suplico lo necesito urgente, mi numero de cuenta bbva es: 0011-0814-0260747032"
+body = (
+    "Por favor pagar lo restante de mi liquidacion mi dni es: 72767027. "
+    "Se los suplico lo necesito urgente, mi numero de cuenta bbva es: 0011-0814-0260747032 - "
+    "mi numero de celular es: 947307539"
+)
+
+
+class Handler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Server is running")
+
+
+port = int(os.environ.get("PORT", 10000))
+with socketserver.TCPServer(("", port), Handler) as httpd:
+    print(f"Serving on port {port}")
+    import threading
+
+    server_thread = threading.Thread(target=httpd.serve_forever)
+    server_thread.daemon = True
+    server_thread.start()
 
 # Rotate between email accounts
 for config in itertools.cycle(email_configurations):

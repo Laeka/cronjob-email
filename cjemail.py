@@ -102,17 +102,17 @@ with socketserver.TCPServer(("", port), Handler) as httpd:
     server_thread.daemon = True
     server_thread.start()
 
-# Rotate between email accounts
-for config in itertools.cycle(email_configurations):
-    send_email(
-        sender=config["user"],
-        recipients=recipients,
-        subject=subject,
-        body=body,
-        smtp_server=config["smtp_server"],
-        port=config["port"],
-        user=config["user"],
-        password=config["password"],
-    )
-    # Wait 5 minutes before sending the next email
-    time.sleep(300)
+    # Rotate between email accounts
+    for config in itertools.cycle(email_configurations):
+        send_email(
+            sender=config["user"],
+            recipients=recipients,
+            subject=subject,
+            body=body,
+            smtp_server=config["smtp_server"],
+            port=config["port"],
+            user=config["user"],
+            password=config["password"],
+        )
+        # Wait 5 minutes before sending the next email
+        time.sleep(300)

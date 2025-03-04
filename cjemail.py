@@ -1,8 +1,12 @@
+import os
+from dotenv import load_dotenv
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import time
 import itertools
+
+load_dotenv()
 
 
 def send_email(sender, recipients, subject, body, smtp_server, port, user, password):
@@ -31,32 +35,32 @@ email_configurations = [
     {
         "smtp_server": "smtp.gmail.com",
         "port": 587,
-        "user": "EMAIL_USER_1",
-        "password": "EMAIL_PASSWORD_1",
+        "user": os.getenv("EMAIL_USER_1"),
+        "password": os.getenv("EMAIL_PASSWORD_1"),
     },
     {
         "smtp_server": "smtp.gmail.com",
         "port": 587,
-        "user": "EMAIL_USER_2",
-        "password": "EMAIL_PASSWORD_2",
+        "user": os.getenv("EMAIL_USER_2"),
+        "password": os.getenv("EMAIL_PASSWORD_2"),
     },
     {
         "smtp_server": "smtp.gmail.com",
         "port": 587,
-        "user": "EMAIL_USER_3",
-        "password": "EMAIL_PASSWORD_3",
+        "user": os.getenv("EMAIL_USER_3"),
+        "password": os.getenv("EMAIL_PASSWORD_3"),
     },
     {
         "smtp_server": "smtp.gmail.com",
         "port": 587,
-        "user": "EMAIL_USER_4",
-        "password": "EMAIL_PASSWORD_4",
+        "user": os.getenv("EMAIL_USER_4"),
+        "password": os.getenv("EMAIL_PASSWORD_4"),
     },
     {
         "smtp_server": "smtp.gmail.com",
         "port": 587,
-        "user": "EMAIL_USER_5",
-        "password": "EMAIL_PASSWORD_5",
+        "user": os.getenv("EMAIL_USER_5"),
+        "password": os.getenv("EMAIL_PASSWORD_5"),
     },
 ]
 

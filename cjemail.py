@@ -66,6 +66,7 @@ recipients = [
     "archivos@kobsa.com.pe",
     "abarrionuevo@kobsa.com.pe",
     "avera@kobsa.com.pe",
+    "gestion.personal@kobsa.com.pe",
 ]
 
 # Email data to send

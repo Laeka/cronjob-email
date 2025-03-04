@@ -30,35 +30,37 @@ def send_email(sender, recipients, subject, body, smtp_server, port, user, passw
         print(f"Failed to send email from {sender}: {e}")
 
 
+PORT = 10000
+
 # List of email configurations
 email_configurations = [
     {
         "smtp_server": "smtp.gmail.com",
-        "port": 587,
+        "port": PORT,
         "user": os.getenv("EMAIL_USER_1"),
         "password": os.getenv("EMAIL_PASSWORD_1"),
     },
     {
         "smtp_server": "smtp.gmail.com",
-        "port": 587,
+        "port": PORT,
         "user": os.getenv("EMAIL_USER_2"),
         "password": os.getenv("EMAIL_PASSWORD_2"),
     },
     {
         "smtp_server": "smtp.gmail.com",
-        "port": 587,
+        "port": PORT,
         "user": os.getenv("EMAIL_USER_3"),
         "password": os.getenv("EMAIL_PASSWORD_3"),
     },
     {
         "smtp_server": "smtp.gmail.com",
-        "port": 587,
+        "port": PORT,
         "user": os.getenv("EMAIL_USER_4"),
         "password": os.getenv("EMAIL_PASSWORD_4"),
     },
     {
         "smtp_server": "smtp.gmail.com",
-        "port": 587,
+        "port": PORT,
         "user": os.getenv("EMAIL_USER_5"),
         "password": os.getenv("EMAIL_PASSWORD_5"),
     },

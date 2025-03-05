@@ -1,4 +1,5 @@
 import os
+import logging
 from dotenv import load_dotenv
 import smtplib
 from email.mime.text import MIMEText
@@ -8,10 +9,17 @@ import itertools
 import http.server
 import socketserver
 
+# Configurar el logger
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 load_dotenv()
+logging.info("Environment variables loaded successfully")
 
 
 def send_email(sender, recipients, subject, body, smtp_server, port, user, password):
+    logging.info(f"Attempting to send email from {sender} to {', '.join(recipients)}")
     # Configure the message
     message = MIMEMultipart()
     message["From"] = sender
@@ -27,9 +35,11 @@ def send_email(sender, recipients, subject, body, smtp_server, port, user, passw
             server.starttls()
             server.login(user, password)
             server.sendmail(sender, recipients, message.as_string())
-        print(f"Email sent successfully from {sender} to {', '.join(recipients)}")
+        logging.info(
+            f"Email sent successfully from {sender} to {', '.join(recipients)}"
+        )
     except Exception as e:
-        print(f"Failed to send email from {sender}: {e}")
+        logging.error(f"Failed to send email from {sender}: {e}")
 
 
 EMAIL_PORT = 587
@@ -95,7 +105,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 port = int(os.environ.get("PORT", 10000))
 with socketserver.TCPServer(("", port), Handler) as httpd:
-    print(f"Serving on port {port}")
+    logging.info(f"Serving on port {port}")
     import threading
 
     server_thread = threading.Thread(target=httpd.serve_forever)
@@ -115,4 +125,5 @@ with socketserver.TCPServer(("", port), Handler) as httpd:
             password=config["password"],
         )
         # Wait 5 minutes before sending the next email
+        logging.info(f"Waiting for 5 minutes before sending the next email...")
         time.sleep(300)

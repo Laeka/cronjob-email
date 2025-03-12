@@ -103,7 +103,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(b"Server is running")
 
 
-port = int(os.environ.get("PORT", 10000))
+port = int(os.environ.get("PORT", 8080))
 with socketserver.TCPServer(("", port), Handler) as httpd:
     logging.info(f"Serving on port {port}")
     import threading

@@ -1,13 +1,16 @@
 import os
 import logging
-from dotenv import load_dotenv
+import signal
+import sys
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import time
 import itertools
 import http.server
 import socketserver
+
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
 
 # Configurar el logger
 logging.basicConfig(
@@ -41,6 +44,14 @@ def send_email(sender, recipients, subject, body, smtp_server, port, user, passw
     except Exception as e:
         logging.error(f"Failed to send email from {sender}: {e}")
 
+
+def signal_handler(sig, frame):
+    logging.info("Received interrupt signal, closing the application...")
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 EMAIL_PORT = 587
 
@@ -104,6 +115,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 port = int(os.environ.get("PORT", 8080))
+logging.info(f"Starting server on port {port}")
+
 with socketserver.TCPServer(("", port), Handler) as httpd:
     logging.info(f"Serving on port {port}")
     import threading

@@ -92,7 +92,7 @@ subject = "Pago de mi liquidacion atrasado 1 año y 6 meses"
 body = (
     "Por favor pagar lo restante de mi liquidacion mi dni es: 72767027. "
     "Se los suplico lo necesito urgente, mi numero de cuenta bbva es: 0011-0814-0260747032 - "
-    "mi numero de celular es: 947307539"
+    "A pesar del mensaje enviado por whatsapp necesito una fecha exacta ya que es de suma urgencia y creo que es lo correcto"
 )
 
 

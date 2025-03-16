@@ -23,6 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
         # python-dotenv
+      
+      - name: Mostrar hora de ejecucion
+        run: date
 
       - name: Ejecutar script de envío de email
         env:

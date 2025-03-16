@@ -4,6 +4,7 @@ import signal
 import sys
 import smtplib
 import random
+import datetime
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -46,6 +47,7 @@ def main():
     )
     load_dotenv()
     logging.info("Variables de entorno cargadas exitosamente")
+    logging.info("Inicio de ejecucion:" + datetime.datetime.now().isoformat())
 
     EMAIL_PORT = 587
 

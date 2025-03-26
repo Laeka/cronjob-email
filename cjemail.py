@@ -90,13 +90,25 @@ def main():
         "abarrionuevo@kobsa.com.pe",
         "avera@kobsa.com.pe",
         "gestion.personal@kobsa.com.pe",
+        "sedanet@sedapal.com.pe",
     ]
 
-    subject = "Pago de mi liquidacion atrasado 1 año y 6 meses"
+    subject = "Exigencia de pago inmediato de liquidación pendiente (más de 1 año y 6 meses de retraso)"
+
     body = (
-        "Por favor pagar lo restante de mi liquidacion mi dni es: 72767027. "
-        "Se los suplico lo necesito urgente, mi numero de cuenta bbva es: 0011-0814-0260747032 - "
-        "Sigo sin tener respuesta y por whatsapp ya no me contestan ya pasaron: 1 año y 3 meses por favor!!"
+        "Estimados representantes de Kobsa y Sedapal:\n\n"
+        "Por este medio, exijo formalmente el pago inmediato de mi liquidación pendiente, "
+        "la cual ha sido injustamente retrasada por más de 1 año y 6 meses. "
+        "A pesar de mis reiteradas gestiones (incluyendo contactos vía WhatsApp), "
+        "no he recibido respuesta ni solución alguna.\n\n"
+        "Mis datos para agilizar el proceso:\n"
+        "- DNI: 72767027\n"
+        "- Número de celular: 947307539\n"
+        "- Cuenta BBVA: 0011-0814-0260747032\n\n"
+        "Requiero que este pago se concrete el mismo día de recepción de este mensaje. "
+        "De no recibir confirmación, procederé a escalar este reclamo ante las autoridades de Sedapal.\n\n"
+        "Atentamente,\n"
+        "Cristian Tocto"
     )
 
     config = random.choice(email_configurations)
